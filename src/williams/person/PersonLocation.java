@@ -1,5 +1,7 @@
 package williams.person;
 
+import java.util.Collection;
+
 abstract class PersonLocation {
 
 	/***
@@ -13,6 +15,10 @@ abstract class PersonLocation {
 		}
 		p.setLocation( this );
 		this.add( p );
+	}
+	
+	public final void placeAll( Collection<? extends Person> c ) {
+		c.stream().forEach( person -> this.place(person) );
 	}
 	
 	protected abstract void add( Person p );
