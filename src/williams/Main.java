@@ -26,6 +26,15 @@ public class Main {
 		bar.place( new Person( "Betty" ) );
 		bar.place( new Person( "Sam" ) );
 		
+		// Can lose people by creating a malicious location
+		// that overrides an existing location
+		Trap trap = new Trap();
+		trap.setName("Trap");
+		for( Person p : bar )
+			trap.place( p );
+		if( !trap.contains( george ) )
+			throw new RuntimeException( "Everyone disappeared into a trap!" );
+		
 		// Shouldn't be able to access abstract location class
 		// or override location classes to make people disappear.
 		// The following two can't be done because PersonLocation 
