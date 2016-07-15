@@ -19,12 +19,15 @@ public class Person {
 		this.name = name;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private PersonLocation location;
 	
+	@SuppressWarnings("rawtypes")
 	PersonLocation getLocation() {
 		return location;
 	}	
 	
+	@SuppressWarnings("rawtypes")
 	void setLocation( PersonLocation newloc ) {
 		location = newloc;
 		if( newloc != null ) {
