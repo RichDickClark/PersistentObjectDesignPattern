@@ -3,7 +3,6 @@ package williams;
 import williams.person.Person;
 import williams.person.PersonArrayList;
 import williams.person.PersonLocation;
-import williams.person.Pit;
 
 public class Main {
 
