@@ -27,7 +27,12 @@ public class Person {
 	
 	void setLocation( PersonLocation newloc ) {
 		location = newloc;
-		locationHistory.add( newloc.getName() );
+		if( newloc != null ) {
+			locationHistory.add( newloc.getName() );
+		}
+		else {
+			locationHistory.add( "null" );
+		}
 	}
 	
 	

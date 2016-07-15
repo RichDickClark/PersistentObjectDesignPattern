@@ -9,3 +9,11 @@ by placing it in another location.  This helps
 prevent programming errors which would result in an
 object being in two places at once or in no location
 at all.
+
+Note that the guarantee that an object remains in 
+exactly one location after being added to a location
+rests upon the assumption that there are no classes
+in the same package with the object and location classes.
+Another class that had access to the protected members
+of the object and location classes could duplicate 
+objects or cause them to disappear.  

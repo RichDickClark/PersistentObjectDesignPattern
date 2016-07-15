@@ -1,10 +1,9 @@
 package williams;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import williams.person.Person;
 import williams.person.PersonArrayList;
+import williams.person.PersonLocation;
+import williams.person.Pit;
 
 public class Main {
 
@@ -15,22 +14,40 @@ public class Main {
 	 ***/
 	public static void main( String[] args ) {
 		
-		Person george = new Person( "George" );
-		
-		List<Person> people = new ArrayList<Person>();
-		people.add( george );
-		people.add( new Person( "Betty" ) );
-		people.add( new Person( "Sam" ) );
-		
+		// Person Locations
 		PersonArrayList bar = new PersonArrayList("bar");
 		PersonArrayList bathroom = new PersonArrayList("bathroom");
 		PersonArrayList home = new PersonArrayList("home");
 		
+		Person george = new Person( "George" );
+		bar.place( george );
+		bar.place( new Person( "Betty" ) );
+		bar.place( new Person( "Sam" ) );
+		
+		// Shouldn't be able to access abstract location class
+		// or override location classes to make people disappear
+		PersonLocation hotelCalifornia = new PersonLocation("Hotel California") {
+
+			@Override
+			protected void add(Person p) {
+				// They just disappear!
+			}
+
+			@Override
+			protected void remove(Person p) {
+			}
+			
+		};
+		hotelCalifornia.place( george ); // Goodby George
+		
+		PersonLocation thePit = new Pit();
+		thePit.place( george ); // Goodbye George
+
+		
 //		for( Person p : people )
 //			bar.add(p); // should create compilation error 
 		
-		for( Person p : people )
-			bar.place(p);
+
 		
 		// Can't meddle with Person::location
 //		people.get(0).location = home; // should create compilation error
