@@ -1,6 +1,7 @@
 package williams.person;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 /***
@@ -12,9 +13,23 @@ import java.util.Iterator;
  */
 public class PersonArrayList extends PersonLocation implements Iterable<Person> {
 
-	public PersonArrayList(String name) {
-		super(name);
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+     */
+	public PersonArrayList() {
 	}
+	
+    /**
+     * Constructs a list containing the elements of the specified
+     * collection, in the order they are returned by the collection's
+     * iterator.
+     *
+     * @param c the collection whose elements are to be placed into this list
+     * @throws NullPointerException if the specified collection is null
+     */
+    public PersonArrayList(Collection<? extends Person> c) {
+    	c.stream().forEach( person -> this.place(person) );
+    }
 
 	private ArrayList<Person> list = new ArrayList<Person>();
 	

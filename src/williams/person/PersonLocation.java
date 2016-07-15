@@ -21,14 +21,17 @@ abstract class PersonLocation {
 
 	
 	
-	private final String name;
+	private String name;
 	
-	public PersonLocation( String name ) {
-		this.name = name;
+	public PersonLocation() {
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName( String v ) {
+		this.name = v;
 	}
 	
 }

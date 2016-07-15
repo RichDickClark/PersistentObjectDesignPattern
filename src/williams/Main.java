@@ -14,9 +14,12 @@ public class Main {
 	public static void main( String[] args ) {
 		
 		// Person Locations
-		PersonArrayList bar = new PersonArrayList("bar");
-		PersonArrayList bathroom = new PersonArrayList("bathroom");
-		PersonArrayList home = new PersonArrayList("home");
+		PersonArrayList bar = new PersonArrayList();
+		bar.setName("bar");
+		PersonArrayList bathroom = new PersonArrayList();
+		bathroom.setName("bathroom");
+		PersonArrayList home = new PersonArrayList();
+		home.setName("home");
 		
 		Person george = new Person( "George" );
 		bar.place( george );
