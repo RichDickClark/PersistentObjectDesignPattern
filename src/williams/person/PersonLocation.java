@@ -1,13 +1,13 @@
 package williams.person;
 
-public abstract class PersonLocation {
+abstract class PersonLocation {
 
 	/***
 	 * Move the person to this location, ensuring they are 
 	 * removed from their previous location
 	 * @param p
 	 */
-	public void place( Person p ) {
+	public final void place( Person p ) {
 		if( p.getLocation() != null ) {
 			p.getLocation().remove(p);
 		}
