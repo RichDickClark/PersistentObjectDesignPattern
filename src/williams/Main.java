@@ -63,13 +63,13 @@ public class Main {
 
 		
 		// Can't meddle with Person::location
-//		people.get(0).location = home; // should create compilation error
+//		george.location = home; // should create compilation error
 		
-		// Can't even see Peron::location
+		// Can't even see Person::location
 //		george.getLocation(); // should create compilation error
 		
 		// Can't put a person nowhere
-//		bar.remove(people.get(0)); // should create compilation error
+//		bar.remove(bar.get(0)); // should create compilation error
 		
 		// Can't have a person in two places at once
 //		home.add( bar.get(0) ); // should create compilation error
