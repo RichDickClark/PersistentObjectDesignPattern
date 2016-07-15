@@ -2,16 +2,20 @@ package williams.person;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Stream;
 
 /***
  * Make sure nothing but object and abstract location class are in same package with
  * these specific location classes.  Otherwise other code will have access to the
  * add() and remove() methods, subverting the whole point of this pattern.  
- * @author ri18384
+ * @author Clark Williams
  *
  */
-public class PersonArrayList extends PersonLocation implements Iterable<Person> {
+public class PersonArrayList<E extends Person> extends PersonLocation<E> implements Iterable<E> {
 
     /**
      * Constructs an empty list with an initial capacity of ten.
@@ -20,21 +24,21 @@ public class PersonArrayList extends PersonLocation implements Iterable<Person> 
 	}
 	
     /**
-     * Constructs a list containing the elements of the specified
+     * Constructs a person array list containing the elements of the specified
      * collection, in the order they are returned by the collection's
      * iterator.
      *
      * @param c the collection whose elements are to be placed into this list
      * @throws NullPointerException if the specified collection is null
      */
-    public PersonArrayList(Collection<? extends Person> c) {
+    public PersonArrayList(Collection<? extends E> c) {
     	c.stream().forEach( person -> this.place(person) );
     }
 
-	private ArrayList<Person> list = new ArrayList<Person>();
+	private ArrayList<E> list = new ArrayList<E>();
 	
 	@Override
-	protected void add(Person p) {
+	protected void add(E p) {
 		list.add(p);
 	}
 
@@ -45,13 +49,17 @@ public class PersonArrayList extends PersonLocation implements Iterable<Person> 
 	 * @param p
 	 */
 	@Override
-	protected void remove(Person p) {
+	protected void remove(Object p) {
 		list.remove(p);
 	}
 
 	@Override
-	public Iterator<Person> iterator() {
-		return list.iterator();
+	public Iterator<E> iterator() {
+		// If we just return list.iterator() and the calling code
+		// places any of the cards it will modify this.list,
+		// resulting in a ConcurrentModificationException.
+		// We therefore return an iterator to a copy of the list.
+		return (new ArrayList<E>(list)).iterator();
 	}
 	
     /**
@@ -61,7 +69,7 @@ public class PersonArrayList extends PersonLocation implements Iterable<Person> 
      * @return the element at the specified position in this list
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
-	public Person get(int index) {
+	public E get(int index) {
 		return list.get(index);
 	}
 	
@@ -77,5 +85,32 @@ public class PersonArrayList extends PersonLocation implements Iterable<Person> 
     public boolean contains(Object o) {
         return list.contains(o);
     }
+    
+    /**
+     * Returns <tt>true</tt> if this list contains no elements.
+     *
+     * @return <tt>true</tt> if this list contains no elements
+     */
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+    
+    /**
+     * Returns a sequential {@code Stream} with this collection as its source.
+     *
+     * @return a sequential {@code Stream} over the elements in this collection
+     */
+    public Stream<E> stream() {
+        return list.stream();
+    }
+    
+    public void shuffle( Random rng ) {
+        Collections.shuffle( this.list, rng );
+    }
+
+	public List<E> asUnmodifiableList() {
+		return Collections.unmodifiableList( this.list );
+	}
 
 }
+

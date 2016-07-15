@@ -1,29 +1,29 @@
 package williams.person;
 
-import java.util.Collection;
-
-abstract class PersonLocation {
+abstract class PersonLocation<E extends Person> {
 
 	/***
 	 * Move the person to this location, ensuring they are 
 	 * removed from their previous location
-	 * @param p
+	 * @param person
 	 */
-	public final void place( Person p ) {
-		if( p.getLocation() != null ) {
-			p.getLocation().remove(p);
+	public final void place( E person ) {
+		if( person.getLocation() != null ) {
+			person.getLocation().remove(person);
 		}
-		p.setLocation( this );
-		this.add( p );
+		person.setLocation( this );
+		this.add( person );
 	}
 	
-	public final void placeAll( Collection<? extends Person> c ) {
-		c.stream().forEach( person -> this.place(person) );
+	public final void placeAll( Iterable<? extends E> c ) {
+		for( E person : c ) {
+			this.place(person);
+		}
 	}
 	
-	protected abstract void add( Person p );
+	protected abstract void add( E person );
 	
-	protected abstract void remove( Person p );
+	protected abstract void remove( Object person );
 
 	
 	

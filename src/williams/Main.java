@@ -14,11 +14,11 @@ public class Main {
 	public static void main( String[] args ) {
 		
 		// Person Locations
-		PersonArrayList bar = new PersonArrayList();
+		PersonArrayList<Person> bar = new PersonArrayList<Person>();
 		bar.setName("bar");
-		PersonArrayList bathroom = new PersonArrayList();
+		PersonArrayList<Person> bathroom = new PersonArrayList<Person>();
 		bathroom.setName("bathroom");
-		PersonArrayList home = new PersonArrayList();
+		PersonArrayList<Person> home = new PersonArrayList<Person>();
 		home.setName("home");
 		
 		Person george = new Person( "George" );
