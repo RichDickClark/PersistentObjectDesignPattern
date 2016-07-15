@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Stack;
 
-public class PersonStack<E extends Person> extends PersonLocation<E> implements Iterable<E> {
+public final class PersonStack<E extends Person> extends PersonLocation<E> implements Iterable<E> {
 
 	public PersonStack() {
 	}
